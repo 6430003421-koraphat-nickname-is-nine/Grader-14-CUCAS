@@ -1,0 +1,93 @@
+#include <iostream>
+#include <iomanip>
+#include <map>
+
+using namespace std;
+
+
+
+void map_input(map<auto,int> &m,map<auto,int> &mc, auto x,int score){
+    //cout << x << endl;
+    if (m.find(x) == m.end()){ m[x] = 0;}//cout << "test0a"<<endl;}
+    if (mc.find(x) == mc.end()){ mc[x] = 0;}//cout << "test0b"<<endl;}
+    m[x] += score;
+    mc[x] += 1;
+    //cout << m[x]<<endl;
+    //cout << mc[x]<<endl;
+    //cout << "test0c"<<endl;
+    }
+template <typename T>
+void print_map_v1(map<T,int> &m){
+    cout << "this map : [ ";
+    for(auto it = m.begin();it != m.end();it++){
+        cout << "( " << it->first << ", " << it->second << " ), ";
+    }
+    cout << " ]"<< endl;
+}
+void print_map_v2(map<int,int> &m){
+    cout << "this map : [ ";
+    for(map<int,int>::iterator it = m.begin();it != m.end();it++){
+        cout << "( " << it->first << ", " << it->second << " ), ";
+    }
+    cout << " ]"<< endl;
+}
+
+void print_map_v3(map<string,int> &m){
+    cout << "this map : [ ";
+    for(map<string,int>::iterator it = m.begin();it != m.end();it++){
+        cout << "( " << it->first << ", " << it->second << " ), ";
+    }
+    cout << " ]"<< endl;
+}
+
+
+int main()
+{
+    cout << std::fixed << std::setprecision(2);
+    int n,sub,score;
+    string tea;
+    map<string,int> m2,m2c;
+    map<int,int> m1,m1c;
+
+    cin >> n;
+    for (int i =0 ; i < n ; i++){
+        /*cin >>sub>>tea>>score;
+        cout << "====================" << endl;*/
+        map_input(m1,m1c,sub,score);
+        //cout << "====================" << endl;
+        map_input(m2,m2c,tea,score);
+        /*cout << "====================" << endl;
+        cout << "test1" << endl;*/
+    }
+
+    map<int,int>::iterator it,itc;
+    map<string,int>::iterator itt,ittc;
+
+    /*cout << "test2" << endl;
+    cout << "m1 :";
+    print_map_v1(m1);
+    cout << "m1c :";
+    print_map_v1(m1c);
+    cout << "m2 :";
+    print_map_v1(m2);
+    cout << "m2c :";
+    print_map_v1(m2c);
+    cout << m1.begin()->first << "      "<< (m1c.find(m1.begin()->first))->second<< endl;
+    cout << m2.begin()->first << "      "<< (m2c.find(m2.begin()->first))->second << endl;*/
+
+    float kprint;
+
+    for (it = m1.begin();it != m1.end();it ++){
+        itc = m1c.find(it->first);
+        kprint = (it->second + 0.0)/(itc->second);
+        cout << it->first << " " <<kprint << endl;
+        //cout << "test3" << endl;
+    }
+    for (itt = m2.begin();itt != m2.end();itt ++){
+        ittc = m2c.find(itt->first);
+        kprint = (itt->second + 0.0)/(ittc->second);
+        cout << itt->first << " " <<kprint << endl;
+        //cout << "test4" << endl;
+    }
+
+}
